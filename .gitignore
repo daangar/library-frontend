@@ -21,6 +21,10 @@ out/
 .env.production.local
 *.local
 
+# Keep example and production env files for deployment
+!.env.example
+!.env.production
+
 # Logs
 logs/
 *.log
