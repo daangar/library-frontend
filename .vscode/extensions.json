@@ -1,0 +1,44 @@
+{
+  "recommendations": [
+    // Essential for React/TypeScript development
+    "ms-vscode.vscode-typescript-next",
+    "bradlc.vscode-tailwindcss",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    
+    // React specific
+    "ms-vscode.vscode-react-javascript",
+    "formulahendry.auto-rename-tag",
+    "bradlc.vscode-tailwindcss",
+    
+    // TypeScript enhancement
+    "ms-vscode.typescript-hero",
+    "usernamehw.errorlens",
+    
+    // Git
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+    
+    // HTML/CSS
+    "formulahendry.auto-close-tag",
+    "zignd.html-css-class-completion",
+    "pranaygp.vscode-css-peek",
+    
+    // Productivity
+    "christian-kohler.path-intellisense",
+    "ms-vscode.vscode-json",
+    "oderwat.indent-rainbow",
+    "pkief.material-icon-theme",
+    "ms-vscode-remote.remote-containers",
+    
+    // Development tools
+    "humao.rest-client",
+    "ms-vscode.live-server",
+    "rangav.vscode-thunder-client"
+  ],
+  "unwantedRecommendations": [
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "hookyqr.beautify",
+    "ms-vscode.vscode-css-formatter"
+  ]
+}
