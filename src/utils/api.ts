@@ -20,8 +20,15 @@ class ApiService {
 
   private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
     const url = `${API_BASE_URL}${endpoint}`;
+    
+    // Debug logging para development
+    if (import.meta.env.DEV) {
+      console.log(`🌐 API Request: ${options.method || 'GET'} ${url}`);
+    }
+    
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
       ...(options.headers as Record<string, string>),
     };
 
@@ -29,22 +36,47 @@ class ApiService {
       headers.Authorization = `Bearer ${this.token}`;
     }
 
-    const response = await fetch(url, {
-      ...options,
-      headers,
-    });
+    try {
+      const response = await fetch(url, {
+        ...options,
+        headers,
+        mode: 'cors',
+        credentials: 'omit',
+        cache: 'no-cache',
+      });
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({ error: 'Error del servidor' }));
-      throw new Error(errorData.error || `Error ${response.status}`);
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Error del servidor' }));
+        const errorMsg = errorData.error || errorData.detail || `Error ${response.status}`;
+        if (import.meta.env.DEV) {
+          console.error(`❌ API Error: ${response.status} - ${errorMsg}`);
+        }
+        throw new Error(errorMsg);
+      }
+
+      // Respuestas sin contenido
+      if (response.status === 204) {
+        return {} as T;
+      }
+
+      const data = await response.json();
+      if (import.meta.env.DEV) {
+        console.log(`✅ API Response: ${options.method || 'GET'} ${url}`, data);
+      }
+      return data;
+      
+    } catch (error) {
+      if (import.meta.env.DEV) {
+        console.error(`🚨 Fetch Error for ${url}:`, error);
+      }
+      
+      // Si es un error de red o CORS, lanzar mensaje más específico
+      if (error instanceof TypeError && error.message === 'Failed to fetch') {
+        throw new Error('Error CORS: El backend no permite requests desde localhost:3000. Contactar al administrador del backend para configurar CORS.');
+      }
+      
+      throw error;
     }
-
-    // Respuestas sin contenido
-    if (response.status === 204) {
-      return {} as T;
-    }
-
-    return response.json();
   }
 
   // Authentication

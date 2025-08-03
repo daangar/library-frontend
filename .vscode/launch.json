@@ -64,6 +64,48 @@
       }
     },
     {
+      "name": "Launch Chrome - Production Backend",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/src",
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ],
+      "skipFiles": [
+        "<node_internals>/**",
+        "**/node_modules/**"
+      ],
+      "preLaunchTask": "npm: dev:production",
+      "presentation": {
+        "group": "Production Testing",
+        "order": 1
+      }
+    },
+    {
+      "name": "Launch Edge - Production Backend",
+      "type": "msedge",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/src",
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ],
+      "skipFiles": [
+        "<node_internals>/**",
+        "**/node_modules/**"
+      ],
+      "preLaunchTask": "npm: dev:production",
+      "presentation": {
+        "group": "Production Testing",
+        "order": 2
+      }
+    },
+    {
       "name": "Debug Node.js (API Tests)",
       "type": "node",
       "request": "launch",
@@ -90,13 +132,23 @@
   ],
   "compounds": [
     {
-      "name": "Launch React App (Chrome + Node)",
+      "name": "Launch React App (Development)",
       "configurations": [
         "Launch Chrome - Development"
       ],
       "presentation": {
         "group": "Compound",
         "order": 1
+      }
+    },
+    {
+      "name": "Launch React App (Production Testing)",
+      "configurations": [
+        "Launch Chrome - Production Backend"
+      ],
+      "presentation": {
+        "group": "Compound",
+        "order": 2
       }
     }
   ]

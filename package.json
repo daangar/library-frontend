@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:production": "VITE_API_BASE_URL=https://library-api-08fm.onrender.com npm run dev",
     "build": "tsc -b && vite build",
     "build:production": "VITE_API_BASE_URL=https://library-api-08fm.onrender.com npm run build",
     "lint": "echo 'Linting disabled for deploy compatibility'",
