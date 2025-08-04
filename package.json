@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:production": "VITE_API_BASE_URL=https://library-api-08fm.onrender.com npm run dev",
+    "dev:production": "cross-env VITE_API_BASE_URL=https://library-api-08fm.onrender.com vite",
     "build": "tsc -b && vite build",
-    "build:production": "VITE_API_BASE_URL=https://library-api-08fm.onrender.com npm run build",
+    "build:production": "cross-env VITE_API_BASE_URL=https://library-api-08fm.onrender.com tsc -b && vite build",
     "lint": "echo 'Linting disabled for deploy compatibility'",
     "preview": "vite preview"
   },
@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "cross-env": "^10.0.0",
     "eslint": "^9.9.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
